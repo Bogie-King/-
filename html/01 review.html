@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../js/ajax.js"></script>
+</head>
+
+<body>
+
+</body>
+<script>
+    // p.then()
+    // p.catch()
+
+    // p.then().then().then().catch()
+
+    // var p = new Promise(function () { })
+
+
+    // Promise.all();
+    // Promise.race();
+    // Promise.resolve();
+    // Promise.reject();
+
+
+    // Promise.all([p1,p2,p3,1]) => p
+    Promise.myAll = function (arr) {
+        return new Promise(function (resolve, reject) {  // [p1,p2,p3,1]
+            var list = [];
+            var count = 0;
+            for (let i = 0; i < arr.length; i++) {
+                let item = arr[i];  // p1  p2  p3  1
+                if (!(item instanceof Promise)) {   //如果不是Promise实例 => 转化为
+                    item = Promise.resolve(item);
+                }
+                item.then(data => {   // 等待每一个Promise实例 有结果之后的操作(未来才会有结果 => 异步操作)
+                    count++;
+                    list[i] = data;
+                    if (count === arr.length) {  //计数法等待所有的Promise实例处理完毕
+                        resolve(list);
+                    }
+                }).catch(err => {
+                    reject(err);
+                })
+            }
+        })
+    }
+
+    var p1 = readText("../data/1.txt", 1000);
+    var p2 = readText("../data/2.txt", 3000);
+    var p3 = readText("../data/3.txt", 2000);
+
+    var p = Promise.myAll([p1, p2, p3, 1]);
+    p.then(list => {
+        console.log(list);
+    }).catch(err => {
+        throw err;
+    })
+    console.log(p);
+
+
+    // for (let i = 0; i <= 6; i++) {
+    //     setTimeout(function () {
+    //         console.log(i);
+    //     }, 5000)
+    // }
+
+
+    function readText(url, delay = 0) {
+        var p = new Promise(function (resolve, reject) {
+            setTimeout(function () {
+                $.ajax({
+                    type: "get",
+                    url: url,
+                    // dataType: "text",
+                    success: function (txt) {
+                        resolve(txt);
+                    }
+                });
+            }, delay);
+        })
+        return p;
+    }
+</script>
+
+</html>

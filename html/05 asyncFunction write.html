@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../js/ajax.js"></script>
+</head>
+
+<body>
+
+</body>
+<script>
+
+    // function fn() {
+    //     return 100;
+    // }
+
+    // function* fn() {
+    //     yield 10;
+    //     yield 20;
+    //     yield 30;
+    //     return 100;
+    // }
+    // var obj = fn();
+    // console.log(obj);
+
+    // var result = obj.next();
+    // console.log(result);
+
+    // var result = obj.next();
+    // console.log(result);
+
+    // var result = obj.next();
+    // console.log(result);
+
+    // var result = obj.next();
+    // console.log(result);
+
+    // var result = obj.next();
+    // console.log(result);
+
+
+
+
+
+</script>
+<script>
+    // ES2017 标准引入了 async 函数，使得异步操作变得更加方便。
+
+    // async 可以理解为  就是Promise和Generator 封装的语法糖
+
+    // 函数改异步函数 
+
+
+    // async function fn() {
+
+    // }
+
+    // var fn = async function () {
+
+    // }
+
+    // var p = fn();
+    // console.log(p);
+
+    // var person = {
+    //     name: "张三",
+    //     age: 18,
+    //     say: async function () {
+
+    //     },
+    //     async say() {
+    //         return "123123"
+    //     }
+    // }
+
+    // var p = person.say();
+    // console.log(p);
+
+    document.onclick = async function (e) {
+        console.log(e);
+        var num = await randNum();
+        console.log(num);
+    }
+
+
+
+
+    function randNum() {
+        return new Promise(function (resolve) {
+            setTimeout(function () {
+                var num = Math.round(Math.random() * 1000);
+                resolve(num);
+            }, 2000)
+        })
+    }
+
+
+
+
+
+
+
+
+
+</script>
+
+</html>

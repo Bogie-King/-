@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- <script src="../js/ajax.js"></script> -->
+</head>
+
+<body>
+
+</body>
+<script>
+
+    // function fn() {
+    //     return 100;
+    // }
+
+    // function* fn() {
+    //     yield 10;
+    //     yield 20;
+    //     yield 30;
+    //     return 100;
+    // }
+    // var obj = fn();
+    // console.log(obj);
+
+    // var result = obj.next();
+    // console.log(result);
+
+    // var result = obj.next();
+    // console.log(result);
+
+    // var result = obj.next();
+    // console.log(result);
+
+    // var result = obj.next();
+    // console.log(result);
+
+    // var result = obj.next();
+    // console.log(result);
+
+
+
+
+
+</script>
+<script>
+    // ES2017 标准引入了 async 函数，使得异步操作变得更加方便。
+
+    // async 可以理解为  就是Promise和Generator 封装的语法糖
+
+
+    // 同步代码  =>  直接返回对应状态的Promise实例
+    // async function fn() {
+    //     // return 100;
+    //     var err = ReferenceError("a is not defined!");
+    //     throw err;
+    // }
+
+    // var p = fn();
+    // console.log(p);
+    // p.then(data => {
+    //     console.log(data);
+    // }).catch(err => {
+    //     console.log(err);
+    // })
+
+
+    // 异步代码  配合关键词 await   (异步操作需要用Promise封装好)
+    async function fn() {
+        var str = "";
+        var txt = await readText("../data/1.txt"); // p
+        console.log(txt);
+        str += txt;
+        var txt = await readText("../data/2.txt"); // p
+        console.log(txt);
+        str += txt;
+        var txt = await readText("../data/3.txt"); // p
+        console.log(txt);
+        str += txt;
+        return str;
+    }
+
+    // async function fn() {
+    //     var p1 = readText("../data/1.txt");
+    //     var p2 = readText("../data/2.txt");
+    //     var p3 = readText("../data/3.txt");
+    //     var list = await Promise([p1, p2, p3]); // p
+    // }
+
+    var p = fn();
+    console.log(p);
+    p.then(data => {
+        console.log(data);
+    }).catch(err => {
+        console.log(err);
+    })
+
+
+
+
+
+
+
+
+
+
+
+
+
+    function readText(url) {
+        var p = new Promise(function (resolve, reject) {
+            $.ajax({
+                type: "get",
+                url: url,
+                // dataType: "text",
+                success: function (txt) {
+                    resolve(txt);
+                }
+            });
+        })
+        return p;
+    }
+
+
+</script>
+
+</html>
